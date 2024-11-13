@@ -19,6 +19,12 @@ app.use(cors({
     Credentials: true
 }))
 
+// all routes
+const authRoutes = require('./src/users/user.route');
+
+app.use('/api/auth', authRoutes);
+
+
 main().then(()=> console.log("mongo db successfully conected.")).catch(err => console.log(err));
 
 async function main() {

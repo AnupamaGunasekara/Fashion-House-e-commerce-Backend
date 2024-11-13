@@ -1,6 +1,5 @@
-import { Schema } from "mongoose";
-
-const {schema, model} = requre('mongoose');
+const {Schema, model} = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
     username: {type: String, require: true,unique: true },
@@ -11,12 +10,26 @@ const userSchema = new Schema({
     },
     profileImage: String,
     bio:{type: String, maxlength:200},
-    profession:string,
+    profession: String,
     createdAt: {
         type:Date,
         default: Date.now
     }
+});
+
+//hashing password
+userSchema.pre('save',async function(next){
+    const user = this;
+    if(!user.isModified('password')) return next();
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    user.password = hashedPassword;
+    next();
 })
 
-const user = new model('user',userSchema);
-module.exports = user;
+// match password
+userSchema.methods.comparePassword = function(candidatePassword){
+    return bcrypt.compare(candidatePassword, this.password);    
+}
+
+const User = new model('User', userSchema);
+module.exports = User;
