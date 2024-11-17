@@ -22,7 +22,11 @@ app.use(cors({
 // all routes
 const authRoutes = require('./src/users/user.route');
 
+const orderRoutes = require('./src/orders/order.route')
+
 app.use('/api/auth', authRoutes);
+app.use('/api/orders', orderRoutes);
+
 
 
 main().then(()=> console.log("mongo db successfully conected.")).catch(err => console.log(err));
