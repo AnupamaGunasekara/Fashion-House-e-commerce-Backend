@@ -21,11 +21,12 @@ app.use(cors({
 
 // all routes
 const authRoutes = require('./src/users/user.route');
-
-const orderRoutes = require('./src/orders/order.route')
+const orderRoutes = require('./src/orders/order.route');
+const statsRouts = require('./src/stats/stats.route')
 
 app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/stats', statsRouts)
 
 
 
