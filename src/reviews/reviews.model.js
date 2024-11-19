@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const {Schema, model} = require("mongoose");
 
-const ReviewSchema = new mongoose.Schema(
+const ReviewSchema = new Schema(
   {
     comment: {
       type: String,
@@ -11,12 +11,12 @@ const ReviewSchema = new mongoose.Schema(
       required: true,
     },
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
     productId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Product",
       required: true,
     },
@@ -24,5 +24,5 @@ const ReviewSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Reviews = mongoose.model("Product", ReviewSchema);
+const Reviews = new model("Reviews", ReviewSchema);
 module.exports = Reviews;

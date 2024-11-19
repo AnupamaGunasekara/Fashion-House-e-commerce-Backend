@@ -23,9 +23,11 @@ app.use(
 // all routes
 const authRoutes = require("./src/users/user.route");
 const productRoutes = require('./src/products/products.route');
+const reviewRoutes = require('./src/reviews/reviews.router');
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 main()
   .then(() => console.log("mongo db successfully conected."))
@@ -34,7 +36,6 @@ main()
 async function main() {
   await mongoose.connect(process.env.DB_URL);
 
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
   app.get("/", (req, res) => {
     res.send("Hello World!");
   });
