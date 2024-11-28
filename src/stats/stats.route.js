@@ -2,6 +2,8 @@ const express = require('express');
 const User = require('../users/user.model');
 const Order = require('../orders/orders.model');
 const router = express.Router();
+const Products = require('../products/products.model');
+const Reviews = require('../reviews/reviews.model');
 
 // user stats by email
 router.get('/user-stats/:email', async (req, res) => {
