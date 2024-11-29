@@ -71,7 +71,7 @@ router.post('/confirm-payment', async (req, res) => {
 });
 
 //get order by email
-router.get('./:email', async(req,res)=>{
+router.get('/:email', async(req,res)=>{
     const email = req.params.email;
     if(!email){
         return res.status(400).send({message: "email is required"});
@@ -82,7 +82,7 @@ router.get('./:email', async(req,res)=>{
         if(orders.length === 0 || !orders){
             return res.status(400).send({orders:0, message: "no orders found for this email"});
         }
-        res.status(200).send({ orders});
+        res.status(200).send({orders});
     } catch (error) {
         console.error("Error fetching orders by email",email);
         res.status(500).send({message:"failed to fetch orders by email"})
@@ -90,7 +90,7 @@ router.get('./:email', async(req,res)=>{
 });
 
 //get order by id
-router.get('./order/:id', async(req,res)=>{
+router.get('/order/:id', async(req,res)=>{
     try {
         const order = await Order.findById(req.params.id);
         if(!order){
