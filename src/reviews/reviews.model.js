@@ -20,6 +20,11 @@ const ReviewSchema = new Schema(
       ref: "Product",
       required: true,
     },
+    productName: {
+      type: Schema.Types.String,
+      ref: "Product",
+      required: true,
+    },
   },
   { timestamps: true }
 );
