@@ -18,7 +18,10 @@ router.post('/post-review', async(req,res)=>{
             await existingReview.save();
         }else{
             //create new review
-            const newReview = new Reviews({comment, rating, productId, userId});
+            const product = await Products.findById(productId);
+            const productName = product.name;
+            console.log(productName);
+            const newReview = new Reviews({comment, rating, productId, userId, productName});
             await newReview.save();
         }
 
