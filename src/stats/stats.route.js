@@ -20,7 +20,7 @@ router.get('/user-stats/:email', async (req, res) => {
             {$group: {_id: null, totalAmount:{$sum: "$amount"}}}
         ])
         const totalPaymentsAmount = totalPaymentsResult.length > 0 ? totalPaymentsResult[0].totalAmount : 0
-        console.log(totalPaymentsAmount);
+
 
         // get total review
         const totalReviews = await Reviews.countDocuments({ userId: user._id });
