@@ -28,13 +28,15 @@ const authRoutes = require("./src/users/user.route");
 const productRoutes = require('./src/products/products.route');
 const reviewRoutes = require('./src/reviews/reviews.router');
 const orderRoutes = require('./src/orders/order.route');
-const statsRouts = require('./src/stats/stats.route')
+const statsRouts = require('./src/stats/stats.route');
+const contactRoutes = require('./src/Contact/contact.router'); 
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/orders', orderRoutes);
-app.use('/api/stats', statsRouts)
+app.use('/api/stats', statsRouts);
+app.use('/api/contact', contactRoutes);
 
 
 main()
