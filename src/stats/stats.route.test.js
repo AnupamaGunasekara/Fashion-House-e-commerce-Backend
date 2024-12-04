@@ -44,7 +44,7 @@ describe("Stats API", () => {
     const product = await Products.create({
         name: "Test Product",
         price: 200,
-        author: user._id
+        author: new mongoose.Types.ObjectId(),
     })
 
     await Order.create([

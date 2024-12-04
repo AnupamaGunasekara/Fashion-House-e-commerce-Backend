@@ -2,6 +2,12 @@ const jwt = require('jsonwebtoken');
 const verifyToken = require('./verifyToken');
 
 jest.mock('jsonwebtoken');
+jest.mock('jsonwebtoken', () => ({
+    verify: jest.fn().mockImplementation((token, secret, callback) => {
+      if (token === 'validToken') callback(null, { id: '12345' });
+      else callback(new Error('Invalid token'));
+    }),
+  }));
 
 describe('verifyToken Middleware', () => {
     let req, res, next;
