@@ -7,13 +7,13 @@ const sendMail = (name, email, emailToken) => {
     port: 587,
     secure: false,
     auth: {
-      user: process.env.EMAIL, // Your email
-      pass: process.env.EMAIL_PASSWORD, // Your email password or app password
+      user: process.env.EMAIL, 
+      pass: process.env.EMAIL_PASSWORD, 
     },
   });
 
   const mailOptions = {
-    from: '"Fashion House" <support@fashionhouse.com>', // Replace with your email
+    from: '"Fashion House" <support@fashionhouse.com>',
     to: email,
     subject: "Please verify your email...",
     html: `

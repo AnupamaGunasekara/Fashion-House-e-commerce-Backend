@@ -107,7 +107,6 @@ router.patch("/update-product/:id", verifyToken, verifyAdmin, async(req,res)=>{
     }
     res.status(200).send({message: "Product updated successfully", updatedProduct});
   } catch (error) {
-    console.error("Error updating the product", error);
      res.status(500).send({message: "failed to update the product"})
 
   }
