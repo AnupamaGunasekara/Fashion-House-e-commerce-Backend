@@ -2,12 +2,11 @@ const request = require('supertest');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const express = require('express');
-const userRoutes = require('./user.route'); // Adjust path as needed
-const User = require('./user.model'); // User model
+const userRoutes = require('./user.route'); 
+const User = require('./user.model'); 
 
 let app, mongoServer;
 
-// Setup in-memory MongoDB and Express app before tests
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const uri = mongoServer.getUri();
@@ -21,12 +20,10 @@ beforeAll(async () => {
   app.use('/', userRoutes);
 });
 
-// Clear database between tests
 afterEach(async () => {
   await User.deleteMany();
 });
 
-// Disconnect MongoDB and stop the server after tests
 afterAll(async () => {
   await mongoose.disconnect();
   await mongoServer.stop();
