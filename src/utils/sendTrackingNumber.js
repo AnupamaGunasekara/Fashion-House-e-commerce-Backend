@@ -7,24 +7,45 @@ const sendTrackingNumber = (name, email, trackingNumber) => {
     port: 587,
     secure: false,
     auth: {
-      user: process.env.EMAIL, // Your email
-      pass: process.env.EMAIL_PASSWORD, // Your app password
+      user: process.env.EMAIL, 
+      pass: process.env.EMAIL_PASSWORD, 
     },
   });
 
   const mailOptions = {
-    from: '"Fashion House" <support@fashionhouse.com>', // Replace with your email
+    from: '"Fashion House" <support@fashionhouse.com>',
     to: email,
-    subject: "Your Order Has Been Placed!",
-    html: `
-      <p>Hello ${name},</p>
-      <p>Thank you for placing your order with Fashion House.</p>
-      <p>Your order has been successfully placed, and the tracking number is:</p>
-      <h2>${trackingNumber}</h2>
-      <p>You can use this tracking number to check the status of your order on our website.</p>
-      <p>If you have any questions, feel free to contact us.</p>
-      <p>Thank you for shopping with Fashion House!</p>
-    `,
+    text: `
+    Hello ${name},
+    
+    Thank you for placing your order with Fashion House.
+    
+    Your order has been successfully placed, and the tracking details are as follows:
+    
+    Tracking Number: ${trackingNumber}
+    
+    This is an automated message. Please do not reply.
+        `,
+        html: `
+          <html>
+          <body>
+            <h3>Order Confirmation</h3>
+            <pre style="background-color: #f4f4f4; padding: 10px; border-radius: 5px;">
+              {
+                "Customer Name": "${name}",
+                "Email": "${email}",
+                "Tracking Number": "${trackingNumber}"
+              }
+            </pre>
+            <p>Thank you for shopping with Fashion House!</p>
+            <p>If you have any questions, feel free to contact us.</p>
+            <a href="${process.env.FRONTEND_BASE_URL}/contact">Contact us</a>
+            <p>Thank you for shopping with Fashion House!</p>
+            <p>This is an automated message. Please do not reply.</p>
+
+          </body>
+          </html>
+        `,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {

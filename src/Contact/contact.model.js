@@ -10,8 +10,6 @@ const contactSchema = new Schema({
         default: Date.now,
     },
 });
-
-// Static method to get recent messages
 contactSchema.statics.getRecentMessages = function(limit = 10) {
     return this.find().sort({ createdAt: -1 }).limit(limit);
 };

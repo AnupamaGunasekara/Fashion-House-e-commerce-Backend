@@ -15,12 +15,11 @@ const sendMail = (name, email, emailToken) => {
   const mailOptions = {
     from: '"Fashion House" <support@fashionhouse.com>',
     to: email,
-    subject: "Please verify your email...",
+    subject: "You have successfully registered to  the Fashion House",
     html: `
       <p>Hello ${name},</p>
-      <p>Thank you for registering. Please verify your email address by clicking the link below:</p>
-      <a href="${process.env.FRONTEND_BASE_URL}/verify-email?emailToken=${emailToken}">Verify Email</a>
-      <p>If you did not request this, please ignore this email.</p>
+      <h3>Thank you for registering.</h3>
+      <p>If you did not registerd this, please ignore this email.</p>
     `,
   };
 
