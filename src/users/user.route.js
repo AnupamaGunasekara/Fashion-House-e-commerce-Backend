@@ -1,14 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const User = require('./user.model');
+const sendMail = require("../utils/sendMail");
 const generateToken= require('../middleware/generateToken');
+const crypto = require("crypto");
+
 
 // Register endpoint
 router.post('/register', async(req,res)=>{
     try{
         const {username, email, password} = req.body;
         const user = new User({username, email, password});
+        const emailToken = crypto.randomBytes(32).toString("hex");
         await user.save();
+        sendMail(username, email,emailToken);
         res.status(201).send({message: "User Registered Successfully"});
     }catch(error){
         console.error("Error registering user", error);

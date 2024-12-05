@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Order = require('./orders.model');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const sendTrackingNumber = require("../utils/sendTrackingNumber")
 
 // Create checkout session
 router.post('/create-checkout-session', async (req, res) => {
@@ -61,6 +62,10 @@ router.post('/confirm-payment', async (req, res) => {
                 status: session.payment_status === "paid" ? 'pending' : 'failed',
             });
             await order.save(); // Save the order
+            console.log(session.customer_details.name);
+            console.log(session.customer_details.email);
+             sendTrackingNumber(session.customer_details.name,session.customer_details.email,order._id);
+             
         }
 
         res.json({ message: "Payment confirmed and order updated", order });
