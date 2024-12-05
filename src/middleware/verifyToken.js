@@ -19,7 +19,6 @@ const verifyToken = (req, res, next) => {
         next();
         
     } catch (error) {
-        console.error('Error while verifying token', error);
         res.status(401).send({message:'Error while verifying token'});
     }
 }
