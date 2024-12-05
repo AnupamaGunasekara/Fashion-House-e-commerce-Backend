@@ -62,8 +62,6 @@ router.post('/confirm-payment', async (req, res) => {
                 status: session.payment_status === "paid" ? 'pending' : 'failed',
             });
             await order.save(); // Save the order
-            console.log(session.customer_details.name);
-            console.log(session.customer_details.email);
              sendTrackingNumber(session.customer_details.name,session.customer_details.email,order._id);
              
         }

@@ -15,6 +15,7 @@ const sendTrackingNumber = (name, email, trackingNumber) => {
   const mailOptions = {
     from: '"Fashion House" <support@fashionhouse.com>',
     to: email,
+    subject: "Your order has confirmed",
     text: `
     Hello ${name},
     
