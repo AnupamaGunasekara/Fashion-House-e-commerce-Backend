@@ -10,7 +10,6 @@ router.post('/create', async (req, res) => {
         await contact.save();
         res.status(201).send({ message: "Contact details submitted successfully" });
     } catch (error) {
-        console.error("Error creating contact details", error);
         res.status(500).send({ message: "Error submitting contact details" });
     }
 });

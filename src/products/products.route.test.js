@@ -6,10 +6,9 @@ const Reviews = require("../reviews/reviews.model");
 const productRouter = require("./products.route");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 
-// Mock middlewares
 jest.mock("../middleware/verifyToken", () => {
   return (req, res, next) => {
-    req.user = { role: "admin" }; // Mock user with admin privileges
+    req.user = { role: "admin" };
     next();
   };
 });
@@ -45,7 +44,6 @@ describe("Products API - Update Product", () => {
   });
 
   it("should update a product successfully", async () => {
-    // Create a sample product
     const product = await Products.create({
       name: "Test Product",
       price: 100,
@@ -54,20 +52,17 @@ describe("Products API - Update Product", () => {
       author: new mongoose.Types.ObjectId(),
     });
 
-    // Update the product
     const updatedData = { name: "Updated Product", color: "Blue", price: 120 };
     const response = await request(app)
       .patch(`/products/update-product/${product._id}`)
       .send(updatedData);
 
-    // Assert response
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty("message", "Product updated successfully");
     expect(response.body.updatedProduct.name).toBe("Updated Product");
     expect(response.body.updatedProduct.color).toBe("Blue");
     expect(response.body.updatedProduct.price).toBe(120);
 
-    // Verify database update
     const updatedProduct = await Products.findById(product._id);
     expect(updatedProduct.name).toBe("Updated Product");
     expect(updatedProduct.color).toBe("Blue");

@@ -17,8 +17,8 @@ describe('generateToken', () => {
     });
 
     it('should generate a token for a valid user', async () => {
-        User.findById.mockResolvedValue(mockUser); // Mock successful user lookup
-        jwt.sign.mockReturnValue('mockToken'); // Mock token generation
+        User.findById.mockResolvedValue(mockUser);
+        jwt.sign.mockReturnValue('mockToken');
 
         const token = await generateToken(mockUserId);
 

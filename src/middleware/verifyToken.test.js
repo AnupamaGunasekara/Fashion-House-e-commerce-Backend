@@ -13,12 +13,12 @@ describe('verifyToken Middleware', () => {
     let req, res, next;
 
     beforeEach(() => {
-        req = { cookies: {}, headers: {} }; // Mocked request object
+        req = { cookies: {}, headers: {} };
         res = {
             status: jest.fn().mockReturnThis(),
             send: jest.fn(),
-        }; // Mocked response object
-        next = jest.fn(); // Mocked next function
+        }; 
+        next = jest.fn(); 
     });
 
     it('should proceed to the next middleware if token is valid', () => {
@@ -26,7 +26,7 @@ describe('verifyToken Middleware', () => {
         const mockDecoded = { userId: '123', role: 'admin' };
         req.cookies.token = mockToken;
 
-        jwt.verify.mockReturnValue(mockDecoded); // Mock successful verification
+        jwt.verify.mockReturnValue(mockDecoded); 
 
         verifyToken(req, res, next);
 
@@ -50,7 +50,7 @@ describe('verifyToken Middleware', () => {
 
         jwt.verify.mockImplementation(() => {
             throw new Error('Invalid token');
-        }); // Mock failed verification
+        });
 
         verifyToken(req, res, next);
 
@@ -66,7 +66,7 @@ describe('verifyToken Middleware', () => {
 
         jwt.verify.mockImplementation(() => {
             throw new Error('Some error');
-        }); // Mock an unexpected error
+        }); 
 
         verifyToken(req, res, next);
 
